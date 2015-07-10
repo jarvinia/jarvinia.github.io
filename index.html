@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <ul class="posts">
+        {% if site.paginate  %}
+            {% for post in paginator.posts  %}
+                {% include post_item.html  %}
+            {% endfor  %}
+            
+            {% assign pager_url = site.url  %}
+            {% include pagination.html  %}
+        {% else  %}
+            {% for post in site.posts  %}
+                {% include post_item.html  %}
+            {% endfor  %}
+        {% endif  %}
+    </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
