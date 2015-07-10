@@ -16,6 +16,8 @@ timezone: Australia/Sydney
 
 paginator: 8
 
+highlighter: pygments
+
 defaults:
   -
     scope:
