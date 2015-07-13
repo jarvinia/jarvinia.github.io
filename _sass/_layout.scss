@@ -24,6 +24,11 @@
     &:visited {
         color: $grey-color-dark;
     }
+
+    .site-title-small {
+        font-size: 28px;
+        font-style: italic
+    }
 }
 
 .site-nav {
