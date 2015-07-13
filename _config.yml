@@ -27,3 +27,4 @@ defaults:
         layout: "default"
 
 include: .nojekyll
+exclude: jekgitbuild.sh
