@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jun Tu&#39;s Soup     珺の博客</title>
+    <title>Jun Tu&#39;s Soup</title>
     <description>Jun Tu&#39;s Soup, hopefully, it can help you to solve some problems in case that WOMEN get stuck when meetting some tech problems.
 </description>
     <link>http://jarvinia.github.io/</link>
     <atom:link href="http://jarvinia.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Jul 2015 15:18:39 +1000</pubDate>
-    <lastBuildDate>Mon, 13 Jul 2015 15:18:39 +1000</lastBuildDate>
+    <pubDate>Mon, 13 Jul 2015 16:27:04 +1000</pubDate>
+    <lastBuildDate>Mon, 13 Jul 2015 16:27:04 +1000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
+        <title>An Jekyll example</title>
         <description>&lt;p class=&quot;excerpt&quot;&gt;
 &lt;!--excerpt--&gt;
 First Jekyll post. Welcome to my blog!
@@ -40,6 +40,8 @@ First Jekyll post. Welcome to my blog!
         <pubDate>Fri, 10 Jul 2015 00:46:34 +1000</pubDate>
         <link>http://jarvinia.github.io/jekyll/update/2015/07/10/welcome-to-jekyll.html</link>
         <guid isPermaLink="true">http://jarvinia.github.io/jekyll/update/2015/07/10/welcome-to-jekyll.html</guid>
+        
+        <category>English</category>
         
         
         <category>jekyll</category>
