@@ -161,6 +161,8 @@ pre {
   text-shadow: 4px 4px 4px #aaa; }
   .site-title, .site-title:visited {
     color: #424242; }
+  .site-title:hover {
+    text-decoration: none; }
   .site-title .site-title-small {
     font-size: 28px;
     font-style: oblique; }

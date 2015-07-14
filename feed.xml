@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jun Tu&#39;s Soup</title>
-    <description>Jun Tu&#39;s Soup, hopefully, it can help you to solve some problems in case that WOMEN get stuck when meetting some tech problems.
+    <description>Jun Tu&#39;s Soup, hopefully, it can help you in case of getting
+stuck with some tech problems. And I hope more and more women
+to get involved to coding.
 </description>
     <link>http://jarvinia.github.io/</link>
     <atom:link href="http://jarvinia.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Jul 2015 16:27:04 +1000</pubDate>
-    <lastBuildDate>Mon, 13 Jul 2015 16:27:04 +1000</lastBuildDate>
+    <pubDate>Mon, 13 Jul 2015 16:56:19 +1000</pubDate>
+    <lastBuildDate>Mon, 13 Jul 2015 16:56:19 +1000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
