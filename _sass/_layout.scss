@@ -24,6 +24,9 @@
     &:visited {
         color: $grey-color-dark;
     }
+    &:hover {
+        text-decoration: none;
+    }
 
     .site-title-small {
         font-size: 28px;
