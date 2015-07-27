@@ -3,6 +3,7 @@ layout: post
 title:  "An Jekyll example"
 date:   2015-07-09 14:46:34
 categories: jekyll update
+comments: true
 tags: English
 ---
 <p class="excerpt">
