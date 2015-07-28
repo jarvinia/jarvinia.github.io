@@ -110,16 +110,16 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(800px - (30px * 2));
-  max-width: calc(800px - (30px * 2));
+  max-width: -webkit-calc(80% - (30px * 2));
+  max-width: calc(80% - (30px * 2));
   margin-right: auto;
   margin-left: auto;
   padding-right: 30px;
   padding-left: 30px; }
   @media screen and (max-width: 800px) {
     .wrapper {
-      max-width: -webkit-calc(800px - (30px));
-      max-width: calc(800px - (30px));
+      max-width: -webkit-calc(80% - (30px));
+      max-width: calc(80% - (30px));
       padding-right: 15px;
       padding-left: 15px; } }
 
@@ -327,6 +327,14 @@ li.post_item p.excerpt {
   background: #dddddd;
   font-style: italic;
   padding: 0.8em; }
+
+.post_place_holder .post-date {
+  font-family: 'Tangerine', serif;
+  font-weight: 700;
+  font-size: 26px; }
+
+.subscribe {
+  padding-top: 30px; }
 
 /**
  * Syntax highlighting styles
