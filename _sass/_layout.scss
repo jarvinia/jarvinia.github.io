@@ -253,8 +253,21 @@ li.post_item p.excerpt {
     padding-left: 2em;
     color: #555;
 }
+
 .post p.excerpt {
     background: #dddddd;
     font-style: italic;
     padding: 0.8em;
 }
+
+.post_place_holder .post-date{
+    font-family: 'Tangerine', serif;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.subscribe {
+    padding-top: 30px;
+}
+
+

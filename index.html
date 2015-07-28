@@ -2,9 +2,9 @@
 layout: default
 ---
 
-<div class="home">
+<div class="home container-fluid">
 
-  <ul class="posts">
+<!--   <ul class="posts">
         {% if site.paginate  %}
             {% for post in paginator.posts  %}
                 {% include post_item.html  %}
@@ -17,8 +17,31 @@ layout: default
                 {% include post_item.html  %}
             {% endfor  %}
         {% endif  %}
-    </ul>
+    </ul> -->
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    <div class="row">
+        <div class="col-sm-9 blog-main">
+            <div class="post">
+            {% for post in site.posts limit:10%}
+                {% include post_snap.html  %}
+            {% endfor  %}
+            </div>
+        </div>
+
+        <div class="col-sm-3 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>About</h4>
+                
+            </div>
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>Achieves</h4>
+                
+            </div>
+        </div>
+    </div>
+
+  <div class="subscribe">
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  </div>
 
 </div>
