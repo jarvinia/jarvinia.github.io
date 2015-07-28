@@ -328,6 +328,9 @@ li.post_item p.excerpt {
   font-style: italic;
   padding: 0.8em; }
 
+.post_place_holder {
+  padding-top: 30px; }
+
 .post_place_holder .post-date {
   font-family: 'Tangerine', serif;
   font-weight: 700;
@@ -335,6 +338,9 @@ li.post_item p.excerpt {
 
 .subscribe {
   padding-top: 30px; }
+
+.sidebar-title {
+  font-family: 'Tangerine', serif; }
 
 /**
  * Syntax highlighting styles
