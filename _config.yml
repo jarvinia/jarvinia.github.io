@@ -30,3 +30,5 @@ defaults:
 
 include: .nojekyll
 exclude: jekgitbuild.sh
+
+disqus_shortname: 'jarvinia'
