@@ -335,7 +335,9 @@ li.post_item p.excerpt {
 .post_place_holder .post-date {
   font-family: 'Tangerine', serif;
   font-weight: 700;
-  font-size: 26px; }
+  font-size: 26px;
+  line-height: 200%;
+  color: #9398C5; }
 
 .subscribe {
   padding-top: 30px; }
