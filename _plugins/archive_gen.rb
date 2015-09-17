@@ -57,7 +57,7 @@ module Jekyll
 
             self.collated[ y ].keys.each do |m|
                 if self.layouts.key? 'archive_monthly'
-                    self.write_archive( "%04d/%02d" % [ y.to_s, m.to_s ], 'archive_monthly' )
+                    self.write_archive( "%04d/%d" % [ y.to_s, m.to_s ], 'archive_monthly' )
                 end
 
                 self.collated[ y ][ m ].keys.each do |d|

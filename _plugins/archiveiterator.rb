@@ -4,6 +4,7 @@ module Jekyll
 
     site_instance.collated.each do |year, hash|
       hash.each do |month, days|
+        # month = month.to_s.rjust(2, '0')
         monthly_archives << {
           'name'  => "#{Date::MONTHNAMES[month]} #{year}",
           'url'   => "#{year}/#{month}",
