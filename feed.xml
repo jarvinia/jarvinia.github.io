@@ -8,8 +8,8 @@ to get involved in coding.
 </description>
     <link>http://jarvinia.github.io/</link>
     <atom:link href="http://jarvinia.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 28 Jul 2015 16:18:02 +1000</pubDate>
-    <lastBuildDate>Tue, 28 Jul 2015 16:18:02 +1000</lastBuildDate>
+    <pubDate>Thu, 17 Sep 2015 13:33:08 +1000</pubDate>
+    <lastBuildDate>Thu, 17 Sep 2015 13:33:08 +1000</lastBuildDate>
     <generator>Jekyll v2.5.3 (Extended)</generator>
     
       <item>
@@ -51,6 +51,78 @@ First Jekyll post. Welcome to my blog!
         <category>jekyll</category>
         
         <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>初识jQuery</title>
+        <description>&lt;h3 id=&quot;section&quot;&gt;概念&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;window
+下面的代码会加载所有的图片文字后，再执行function内的代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ 
+    &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;welcome&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ 
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;document
+而下面的代码会在窗口刚加载的适合就已经执行function内的代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ 
+    &lt;span class=&quot;c1&quot;&gt;// Your code here.&lt;/span&gt;
+ 
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Fri, 10 Jul 2015 00:46:34 +1000</pubDate>
+        <link>http://jarvinia.github.io/jquery/2015/07/10/jquery.html</link>
+        <guid isPermaLink="true">http://jarvinia.github.io/jquery/2015/07/10/jquery.html</guid>
+        
+        <category>Chinese</category>
+        
+        
+        <category>jquery</category>
+        
+      </item>
+    
+      <item>
+        <title>搭建ElasticSearch</title>
+        <description>&lt;h3 id=&quot;section&quot;&gt;准备工作&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;安装ElasticSearch
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/1.4/setup-repositories.html&quot;&gt;安装步骤参考&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;插件：
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/elasticsearch/elasticsearch-mapper-attachments&quot;&gt;Mapper attachments Apache Tika&lt;/a&gt;
+&lt;code&gt;$ES_HOME/bin/plugin install elasticsearch/elasticsearch-mapper-attachments/2.4.3&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/richardwilly98/elasticsearch-river-mongodb&quot;&gt;ES ‘river’ for Mongodb&lt;/a&gt;
+&lt;code&gt;$ES_HOME/bin/plugin --install com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/2.0.9&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;安装完成以后，重新启动ES service。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 10 Jul 2015 00:46:34 +1000</pubDate>
+        <link>http://jarvinia.github.io/elasticsearch/mongodb/2015/07/10/ES_search_server.html</link>
+        <guid isPermaLink="true">http://jarvinia.github.io/elasticsearch/mongodb/2015/07/10/ES_search_server.html</guid>
+        
+        <category>Chinese</category>
+        
+        
+        <category>elasticsearch</category>
+        
+        <category>mongodb</category>
         
       </item>
     

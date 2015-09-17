@@ -6,11 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>About me</title>
-  <meta name="description" content="Jun Tu's Soup, hopefully, it can help you in case of getting
-stuck with some tech problems. And I hope more and more women
-to get involved in coding.
-">
+  <title>初识jQuery</title>
+  <meta name="description" content="概念  window下面的代码会加载所有的图片文字后，再执行function内的代码">
 
   <link rel="shortcut icon" href="http://jarvinia.github.io/fav.ico">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
@@ -19,7 +16,7 @@ to get involved in coding.
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://jarvinia.github.io/about/">
+  <link rel="canonical" href="http://jarvinia.github.io/jquery/2015/07/10/jquery.html">
   <link rel="alternate" type="application/rss+xml" title="Jun Tu's Soup" href="http://jarvinia.github.io/feed.xml" />
 </head>
 
@@ -70,16 +67,54 @@ to get involved in coding.
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">About me</h1>
+    <h1 class="post-title">初识jQuery</h1>
+    <p class="post-meta">Jul 10, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>我是一名DevOps Engineer，曾经对互联网开发充满了好奇心，现在如愿以偿进入了一家互联网公司。</p>
+    <h3 id="section">概念</h3>
+<ul>
+  <li>window
+下面的代码会加载所有的图片文字后，再执行function内的代码</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+ 
+    <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;welcome&quot;</span> <span class="p">);</span>
+ 
+<span class="p">};</span></code></pre></div>
+
+<ul>
+  <li>document
+而下面的代码会在窗口刚加载的适合就已经执行function内的代码</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+ 
+    <span class="c1">// Your code here.</span>
+ 
+<span class="p">});</span></code></pre></div>
+
 
   </article>
 
 </div>
 
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jarvinia";
+    var disqus_url = "http://jarvinia.github.io/jquery/2015/07/10/jquery.html";
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
       </div>
     </div>
@@ -153,6 +188,24 @@ to get involved in coding.
 
   </body>
 
+  
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '895672030525611',
+        xfbml      : true,
+        version    : 'v2.4'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
   
 
 </html>
