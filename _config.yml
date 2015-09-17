@@ -28,7 +28,8 @@ defaults:
     values:
         layout: "default"
 
-include: .nojekyll
-exclude: jekgitbuild.sh
+include: [.nojekyll]
+exclude: [jekgitbuild.sh]
 
 disqus_shortname: 'jarvinia'
+
