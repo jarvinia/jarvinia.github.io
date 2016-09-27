@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>An Jekyll example</title>
-  <meta name="description" content="First Jekyll post. Welcome to my blog!You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can...">
+  <title>Javascript学习（一）</title>
+  <meta name="description" content="《Javascript高级程序设计》第一章~第五章内容学习简单要点提取：">
 
   <link rel="shortcut icon" href="http://jarvinia.github.io/fav.ico">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://jarvinia.github.io/jekyll/update/2015/07/10/welcome-to-jekyll.html">
+  <link rel="canonical" href="http://jarvinia.github.io/javascript/2016/09/27/javascript_learning.html">
   <link rel="alternate" type="application/rss+xml" title="Jun Tu's Soup" href="http://jarvinia.github.io/feed.xml" />
 </head>
 
@@ -67,36 +67,60 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">An Jekyll example</h1>
-    <p class="post-meta">Jul 10, 2015</p>
+    <h1 class="post-title">Javascript学习（一）</h1>
+    <p class="post-meta">Sep 27, 2016</p>
   </header>
 
   <article class="post-content">
-    <p class="excerpt">
-<!--excerpt-->
-First Jekyll post. Welcome to my blog!
-<!--excerpt-->
-</p>
-<p>You’ll find this post in your <kbd>_posts</kbd> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <kbd>jekyll serve</kbd>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+    <p>《Javascript高级程序设计》第一章~第五章内容学习简单要点提取：</p>
 
-<!--break-->
+<ul>
+  <li>函数参数</li>
+</ul>
 
-<p>To add new posts, simply add a file in the <kbd>_posts</kbd> directory that follows the convention <code>YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<p>可以不定义函数参数变量，直接使用arguments对象，或者两者混用。如果改变arguments对象，参数值也会随之改变，这只是单向的。所以修改命名参数不会改变arguments对象。
+<!--break--></p>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">num2</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="nx">alert</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">num3</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">&quot;Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">&#39;Tom&#39;</span><span class="p">)</span>
-<span class="c1">#=&gt; prints &#39;Hi, Tom&#39; to STDOUT.</span></code></pre></div>
+<ul>
+  <li>所有参数只能按值传递，不能按引用传递。</li>
+</ul>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;test python&quot;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">addTen</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">num</span><span class="o">+=</span><span class="mi">10</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">count</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">res</span><span class="o">=</span><span class="nx">addTen</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span> <span class="c1">// 20</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span> <span class="c1">//30</span></code></pre></div>
 
-<script src="https://gist.github.com/parkr/931c1c8d465a04042403.js"> </script>
+<ul>
+  <li>
+    <p>没有重载</p>
+  </li>
+  <li>
+    <p>没有块级作用域</p>
+  </li>
+</ul>
 
-<p>Check out the <a href="http://jekyllrb.com">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://github.com/jekyll/jekyll-help">Jekyll’s dedicated Help repository</a>.</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">doSomething</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 10</span></code></pre></div>
+
+<ul>
+  <li>
+    <p>没有var修饰的变量自动成全局变量</p>
+  </li>
+  <li>
+    <p>优化内存占用的最佳方法就是，用null来释放引用。解除引用的目的不是回收该变量的内存，而是让值脱离当前环境，让垃圾收集器将其回收。</p>
+  </li>
+</ul>
 
 
   </article>
@@ -108,7 +132,7 @@ First Jekyll post. Welcome to my blog!
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "jarvinia";
-    var disqus_url = "http://jarvinia.github.io/jekyll/update/2015/07/10/welcome-to-jekyll.html";
+    var disqus_url = "http://jarvinia.github.io/javascript/2016/09/27/javascript_learning.html";
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
