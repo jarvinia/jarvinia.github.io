@@ -98,7 +98,7 @@
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">age</span>  <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">job</span>  <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;alert(this.name)&quot;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="k">new</span> <span class="kd">function</span><span class="p">(</span><span class="s2">&quot;alert(this.name)&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">alert</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">==</span> <span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">// false，注意这里是两个“=”，不是三个“=”</span></code></pre></div>
@@ -126,7 +126,7 @@
 <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Nicolas&quot;</span><span class="p">;</span>
 <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span>  <span class="o">=</span> <span class="s2">&quot;14&quot;</span><span class="p">;</span>
 <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">job</span>  <span class="o">=</span> <span class="s2">&quot;student&quot;</span><span class="p">;</span>
-<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="nx">funciton</span><span class="p">(){</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
   <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">};</span>
 
