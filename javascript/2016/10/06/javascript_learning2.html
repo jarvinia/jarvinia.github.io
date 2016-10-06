@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Javascript学习（二）</title>
+  <meta name="description" content="这篇文章主要介绍一些关于如何创建对象的知识。参考《Javascript高级程序设计》第六章-面向对象的程序设计。">
+
+  <link rel="shortcut icon" href="http://jarvinia.github.io/fav.ico">
+  <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Tangerine" rel="stylesheet">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://jarvinia.github.io/javascript/2016/10/06/javascript_learning2.html">
+  <link rel="alternate" type="application/rss+xml" title="Jun Tu's Soup" href="http://jarvinia.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Jun Tu's Soup<span class="site-title-small"> 珺の博客</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Javascript学习（二）</h1>
+    <p class="post-meta">Oct 6, 2016</p>
+  </header>
+
+  <article class="post-content">
+    <p>这篇文章主要介绍一些关于如何创建对象的知识。参考《Javascript高级程序设计》第六章-面向对象的程序设计。</p>
+
+<h3 id="section">构造函数</h3>
+<ul>
+  <li>始终以一个大写字母开头</li>
+  <li>没有显示地创造对象</li>
+  <li>直接将属性和方法赋给this对象</li>
+  <li>没有return语句</li>
+  <li>任何可以用new调用的函数即为构造函数
+<!--break-->
+使用new操作符，调用构造函数创建实例，具体里面实现了以下步骤：
+    <ol>
+      <li>创建一个新对象</li>
+      <li>将构造函数的作用域赋给新对象</li>
+      <li>执行构造函数中的代码</li>
+      <li>返回新对象</li>
+    </ol>
+  </li>
+</ul>
+
+<p><strong>缺点</strong>：每个方法都要在每个实例中重新创建一遍。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">age</span>  <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">job</span>  <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;alert(this.name)&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">alert</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">==</span> <span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">// false，注意这里是两个“=”，不是三个“=”</span></code></pre></div>
+
+<p>但是创建两个同样任务的实例完全没必要，等会再介绍一些原型模式。</p>
+
+<h3 id="section-1">原型模式</h3>
+<p>每个函数都有一个prototype原型属性，可以指向一个对象，这个对象可以让所有实例共享它包含的属性和方法。</p>
+
+<p>比如，使用new创建两个实例，而这两个实例都包含一个prototype的<strong>指针</strong>，它们都指向同一个地方。</p>
+
+<p>相关方法：</p>
+
+<ul>
+  <li><code>isPrototypeOf()</code></li>
+  <li><code>Object.getPrototypeOf()</code></li>
+</ul>
+
+<p>代码读取对象的某个属性时，会先搜索实例本身的属性值，如果没有找到就会读取原型中的属性值。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span> <span class="c1">// 构造函数</span>
+
+<span class="cm">/* 原型属性 */</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Nicolas&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span>  <span class="o">=</span> <span class="s2">&quot;14&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">job</span>  <span class="o">=</span> <span class="s2">&quot;student&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="nx">funciton</span><span class="p">(){</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="cm">/* 实例 */</span>
+<span class="kd">var</span> <span class="nx">person1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nx">person1</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Jack&quot;</span><span class="p">;</span>
+
+<span class="nx">alert</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">// Jack ------ 来自实例</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">// Nicolas ------ 来自原型</span></code></pre></div>
+
+<p>给实例添加属性，会屏蔽原型属性，而不会修改原型属性。使用“delete”操作符可以恢复原型属性。<strong>“hasOwnPropert()”可以判断实例属性是否存在。联合使用“in”去判断属性是存在于实例中还是原型中。</strong>
+取得对象中可枚举的实例属性，可以使用“Object.keys()”方法。</p>
+
+<p>每创建一个函数，就会自动创建它的prototype对象，这个对象也会<strong>自动获得constractor属性</strong>。如上例，Person构造函数，Person的原型属性和两个实例之间的关系是：Person.prototype指向了原型，而Person.prototype.constructor又指回了<strong>Person</strong>。person1和person2都包含一个内部属性，该属性仅仅指向Person.prototype，他们与构造函数没有之间关系。</p>
+
+<p>重写整个原型对象：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicolas&quot;</span><span class="p">,</span>
+  <span class="nx">age</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="nx">job</span><span class="o">:</span> <span class="s2">&quot;student&quot;</span><span class="p">,</span>
+  <span class="nx">sayName</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nx">Person</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nb">Object</span><span class="p">);</span> <span class="c1">// true</span></code></pre></div>
+
+<p>此时，constructor不再指向Person了。如果想让constructor指向Person，只需要在原型对象里面加一个constructor属性<code>constructor: Person</code>。但是只要，constructor变成可枚举的，原生的是不可枚举的。如果想让constructor指向Person，但又不可枚举，可以使用defineProerty。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s2">&quot;constructor&quot;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">emumerable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">value</span><span class="o">:</span> <span class="nx">Person</span>
+<span class="p">});</span></code></pre></div>
+
+<p>接下来看另一个例子：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">friend</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">friend</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">();</span> <span class="c1">// “hi&quot;, 注意没有报错</span></code></pre></div>
+
+<p>即使在添加新方法之前创建实例，这个实例仍可以访问新方法。这是因为实例与原型之间是一个指针。所以可以随时为原型添加属性和方法，修改会立即在实例中更新。但如果是重新整个原型对象，情况则不一样。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">friend</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="cm">/* 重写原型对象 */</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicolas&quot;</span><span class="p">,</span>
+  <span class="nx">age</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="nx">job</span><span class="o">:</span> <span class="s2">&quot;student&quot;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">friend</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">();</span> <span class="c1">// 报错</span></code></pre></div>
+
+<p>因为在重写原型对象之前，构造函数和实例都指向一个最初的原型对象，再重写之后，构造函数指向了新的原型对象，但是实例还是指向最初的原型对象。</p>
+
+
+  </article>
+
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jarvinia";
+    var disqus_url = "http://jarvinia.github.io/javascript/2016/10/06/javascript_learning2.html";
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jun Tu's Soup</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>涂珺 Jun Tu</li>
+          <li><a href="mailto:jarvinia.tu@gmail.com">jarvinia.tu@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/jarvinia">
+              <i class="fa fa-github fa-lg"></i>
+              <span class="username">jarvinia</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/jtu_super">
+              <i class="fa fa-twitter fa-lg"></i>
+              <span class="username">jtu_super</span>
+            </a>
+          </li>
+          
+
+
+          <li>
+            <a href="https://au.linkedin.com/pub/jun-tu/4b/193/93"><i class="fa fa-linkedin-square fa-lg"></i><span class="username"> Jun Tu</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Jun Tu's Soup, hopefully, it can help you in case of getting
+stuck with some tech problems. And I hope more and more women
+to get involved in coding.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'jarvinia';
+        
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+
+  </body>
+
+  
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '895672030525611',
+        xfbml      : true,
+        version    : 'v2.4'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+  
+
+</html>
