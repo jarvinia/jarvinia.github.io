@@ -82,7 +82,7 @@ blockquote {
   padding-left: 15px;
   font-size: 18px;
   letter-spacing: -1px;
-  font-style: italic; }
+  /*font-style: italic;*/ }
   blockquote > :last-child {
     margin-bottom: 0; }
 
@@ -349,6 +349,14 @@ li.post_item p.excerpt {
 .sidebar-title::first-letter {
   font-size: 125%; }
 
+.post blockquote {
+  margin-top: 1.5em;
+  padding: 1em;
+  border: 1px solid #f1f1f1;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  font-size: .8em; }
+
 blockquote {
   background: #EBEFEE;
   border-left: 10px solid #96A29E;
@@ -356,7 +364,7 @@ blockquote {
   padding: 0.5em 10px;
   quotes: "“" "”" "‘" "’"; }
 
-blockquote:before {
+.sidebar-module blockquote:before {
   color: #ccc;
   content: open-quote;
   font-size: 4em;
