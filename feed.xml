@@ -8,8 +8,8 @@ to get involved in coding.
 </description>
     <link>http://jarvinia.github.io/</link>
     <atom:link href="http://jarvinia.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Nov 2016 15:11:59 +1100</pubDate>
-    <lastBuildDate>Thu, 17 Nov 2016 15:11:59 +1100</lastBuildDate>
+    <pubDate>Sun, 20 Nov 2016 20:06:52 +1100</pubDate>
+    <lastBuildDate>Sun, 20 Nov 2016 20:06:52 +1100</lastBuildDate>
     <generator>Jekyll v2.5.3 (Extended)</generator>
     
       <item>
@@ -104,7 +104,7 @@ to get involved in coding.
 
 &lt;p&gt;在React里有两种“模型”数据：&lt;code&gt;props&lt;/code&gt;和&lt;code&gt;state&lt;/code&gt;。会区分这两者很重要；如果你不确定这两者区别，请浏览&lt;a href=&quot;https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html&quot;&gt;React文档&lt;/a&gt;。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;第三步: 定义用户界面状态的最小非完整版表达方式&lt;/h2&gt;
+&lt;h2 id=&quot;state-&quot;&gt;第三步: 定义用户界面 state 的最小（但完备）表达方式&lt;/h2&gt;
 
 &lt;h3 id=&quot;step-3-identify-the-minimal-but-complete-representation-of-ui-state&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 3: Identify The Minimal (but complete) Representation Of UI State&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
@@ -138,7 +138,7 @@ to get involved in coding.
   &lt;li&gt;&lt;strong&gt;复选框的值&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;state-&quot;&gt;第四步：定义 State 的作用域&lt;/h2&gt;
+&lt;h2 id=&quot;state--1&quot;&gt;第四步：定义 State 的作用域&lt;/h2&gt;
 
 &lt;h3 id=&quot;step-4-identify-where-your-state-should-live&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 4: Identify Where Your State Should Live&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
@@ -170,7 +170,7 @@ to get involved in coding.
 
 &lt;p&gt;现在你可以看看你的应用运行得如何：在搜索框中输入 “ball” （ 即&lt;code&gt;filterText&lt;/code&gt;设置成 “ball” ），再刷新页面。这样你就会看见筛选后的结果。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;第五步：添加反向数据流&lt;/h2&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;第五步：添加反向数据流&lt;/h2&gt;
 
 &lt;h3 id=&quot;step-5-add-inverse-data-flow&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 5: Add Inverse Data Flow&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
@@ -187,15 +187,15 @@ to get involved in coding.
 
 &lt;p&gt;虽然这听上去很复杂的样子，但是真的只有那么几行代码。也很细致地演示了贯穿整个应用的数据流。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-4&quot;&gt;写在最后&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;写在最后&lt;/h2&gt;
 
 &lt;h3 id=&quot;and-thats-it&quot;&gt;&lt;strong&gt;&lt;em&gt;And That’s It&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;p&gt;希望能帮助你去理解如何用 React 创建组件和应用。也许在这过程中，你会输入比以往更多的代码，但是你要记住，代码能够被读懂远比写代码重要，而这个模块就是用了很详尽的代码为了让你更容易读懂。如果你要创建一个大型的组件库，你会很感激整个组件清晰，模块化，还有代码可重用，这样你才开始给代码减重:)&lt;/p&gt;
 </description>
-        <pubDate>Thu, 17 Nov 2016 15:11:59 +1100</pubDate>
-        <link>http://jarvinia.github.io/frontend/2016/11/17/think_in_react_cn.html</link>
-        <guid isPermaLink="true">http://jarvinia.github.io/frontend/2016/11/17/think_in_react_cn.html</guid>
+        <pubDate>Sun, 20 Nov 2016 20:06:52 +1100</pubDate>
+        <link>http://jarvinia.github.io/frontend/2016/11/20/think_in_react_cn.html</link>
+        <guid isPermaLink="true">http://jarvinia.github.io/frontend/2016/11/20/think_in_react_cn.html</guid>
         
         <category>Chinese</category>
         
