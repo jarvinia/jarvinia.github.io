@@ -8,9 +8,201 @@ to get involved in coding.
 </description>
     <link>http://jarvinia.github.io/</link>
     <atom:link href="http://jarvinia.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 16 Mar 2017 11:38:55 +1100</pubDate>
-    <lastBuildDate>Thu, 16 Mar 2017 11:38:55 +1100</lastBuildDate>
+    <pubDate>Thu, 16 Mar 2017 11:45:19 +1100</pubDate>
+    <lastBuildDate>Thu, 16 Mar 2017 11:45:19 +1100</lastBuildDate>
     <generator>Jekyll v2.5.3 (Extended)</generator>
+    
+      <item>
+        <title>React 编程思想</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;原文链接：&lt;a href=&quot;https://facebook.github.io/react/docs/thinking-in-react.html&quot;&gt;https://facebook.github.io/react/docs/thinking-in-react.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;我认为 React 主要功能是可以利用 JavaScript 去建大型且快速的 web 应用。在 Facebook 和 Instagram，React 一直为我们所用。&lt;/p&gt;
+
+&lt;p&gt;React 众多优点之一就是，所想即所建，即怎么构想你的应用，你就可以用 React 怎么去构建它们。这篇文档中，我将会一边整理我的构建应用的思路，一边用 React 去创建一个可搜索的数据表。
+&lt;!--break--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;从视觉稿开始&lt;/h2&gt;
+
+&lt;h3 id=&quot;start-with-a-mock&quot;&gt;&lt;strong&gt;&lt;em&gt;Start With A Mock&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;假设我们已经有一个 JSON API 和一个来自设计师的视觉稿。 很显然，我们的设计师并不怎么出色，因为视觉稿长成这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://facebook.github.io/react/img/blog/thinking-in-react-mock.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;而我们的 JSON API 返回的数据如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Sporting Goods&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;price:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;$49.99&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;stocked:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;true,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Football&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Sporting Goods&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;price:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;$9.99&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;stocked:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;true,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Baseball&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Sporting Goods&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;price:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;$29.99&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;stocked:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;false,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Basketball&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Electronics&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;price:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;$99.99&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;stocked:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;true,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;iPod Touch&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Electronics&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;price:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;$399.99&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;stocked:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;false,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;iPhone 5&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Electronics&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;price:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;$199.99&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;stocked:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;true,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;quot;Nexus 7&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;第一步：将用户界面分割成一个组件层级&lt;/h2&gt;
+
+&lt;h3 id=&quot;step-1-break-the-ui-into-a-component-hierarchy&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 1: Break The UI Into A Component Hierarchy&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;首先要做的一件事就是，将视觉稿中的每个组件（还有子组件）的外围边框画出，并且给它们命名。如果你是和设计师一起工作的话，你会发现他们早已命名好了，其实，他们的 Photoshop 的图层名就可以当做 React 的组件名。&lt;/p&gt;
+
+&lt;p&gt;但是怎样才知道哪些能成为一个独立的组件呢？我们将用同样的技术原则去决定你是否需要创建新的方法或用例。这个技术原则就是单一责任原则（ &lt;em&gt;sigle responsibility principle&lt;/em&gt; ）。也就是说，一个组件只干一件事。如果这个组件还干了其他事，就需要考虑分割出更小的子组件了。&lt;/p&gt;
+
+&lt;p&gt;由于你经常向用户展示 JSON 数据，你会发现好的数据模型可以很好的被映射到相应的用户界面和组件结构。这是因为用户界面和数据需要传递同样的信息结构，它俩密切相关。也就是意味着，将用户界面分割出不同的组件，而每个组件都能准确地表示一个数据模型，而这项工作是非常繁琐的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://facebook.github.io/react/img/blog/thinking-in-react-components.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们这个简单的应用里有5个组件。我们已经把每个组件所代表的数据标注出来了。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;可过滤的产品表 &lt;code&gt;FilterableProductTable&lt;/code&gt; (橘色): 包含了这个数据表整体&lt;/li&gt;
+  &lt;li&gt;搜索条 &lt;code&gt;SearchBar&lt;/code&gt; (蓝色): 接收所有用户数据输入&lt;/li&gt;
+  &lt;li&gt;产品表 &lt;code&gt;ProductTable&lt;/code&gt; (绿色): 根据用户输入，显示和删选数据结果&lt;/li&gt;
+  &lt;li&gt;产品类别行 &lt;code&gt;ProductCategoryRow&lt;/code&gt; (青绿色): 显示产品类别的标题&lt;/li&gt;
+  &lt;li&gt;产品行 &lt;code&gt;ProductRow&lt;/code&gt; (红色): 按行显示一个产品&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果你仔细看产品表&lt;code&gt;ProductTable&lt;/code&gt;，你会发现表标题标签（ “Name” 标签和 “Price” 标签 ）并不是一个独立的组件。这事关性能，但无论哪种方法都有它的理由。比如，我们之所以将它作为产品表&lt;code&gt;ProductTable&lt;/code&gt;的一部分，是因为它是渲染数据的一部分，这正是产品表&lt;code&gt;ProductTable&lt;/code&gt;的职责。但是，如果标题标签逐渐变大变复杂了，比方说，我们再增加一个可供性（ &lt;em&gt;affordances&lt;/em&gt; ）的标签，这个时候就必须要有一个独立的产品表头&lt;code&gt;ProductTableHeader&lt;/code&gt;的组件了。&lt;/p&gt;
+
+&lt;p&gt;我们已经在视觉稿中定义好了各个组件，现在把它们分层排列一下。简单点说，就是视觉稿中包含在另外一个组件中的组件，将表示成层级中的子节点。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;FilterableProductTable&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;SearchBar&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;ProductTable&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code&gt;ProductCategoryRow&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;code&gt;ProductRow&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;react-&quot;&gt;第二步：在 React 中建一个静态的页面&lt;/h2&gt;
+
+&lt;h3 id=&quot;step-2-build-a-static-version-in-react&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 2: Build A Static Version in React&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;!-- &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;vXpAgj&quot; data-user=&quot;lacker&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/lacker/pen/vXpAgj&quot;&gt;Check out this Pen!&lt;/a&gt;&lt;/pre&gt;
+&lt;script async src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt; --&gt;
+&lt;p data-height=&quot;265&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;vXpAgj&quot; data-default-tab=&quot;js,result&quot; data-user=&quot;lacker&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;Thinking In React: Step 2&quot; class=&quot;codepen&quot;&gt;&lt;a href=&quot;http://codepen.io/lacker/pen/vXpAgj/&quot;&gt;请转向CodePen演示代码.&lt;/a&gt;&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;既然我们已经有了组件的层级图，现在可以开始实现这个应用了。最简单的办法是，先建立一个包含数据模型，渲染用户界面的时候尚不交互的版本。而且最好将这些工程解耦，因为建立一个静态版本的时候，需要输入很多代码，而不必思考很久 ，相反，添加交互功能后的版本就需要仔细构思，而增加的代码却不多。我们来看这是为什么。&lt;/p&gt;
+
+&lt;p&gt;在建立一个可以渲染数据的静态应用的时候，你将想到的是建立很多组件，而且这些组件可以重用其它组件，通过使用&lt;code&gt;props&lt;/code&gt;来传入数据。因为我们可以利用&lt;code&gt;props&lt;/code&gt;从父节点向子节点传入数据。如果你熟悉状态&lt;code&gt;state&lt;/code&gt;的概念的话，&lt;strong&gt;你就完全不会在建立静态版本的时候使用&lt;code&gt;state&lt;/code&gt;&lt;/strong&gt;。只有状态&lt;code&gt;state&lt;/code&gt;是预留给交互版本的，因为数据会时刻变化。 考虑到这是个静态版本，所以我们暂时不需要用到它。&lt;/p&gt;
+
+&lt;p&gt;你可以选择从上至下或从下至上来建立这个应用。 也就是说，你可以先建立层级图中的顶层组件&lt;code&gt;FilterableProductTable&lt;/code&gt;或者最底层的组件&lt;code&gt;ProductRow&lt;/code&gt;。从上至下最为简单，但是在大型工程中，比较倾向从下至上，这样比较容易边写边测试。&lt;/p&gt;
+
+&lt;p&gt;最后一步，你需要建立一个可重用的组件库，而这些组件可以渲染你的数据模型。而这个静态版本的组件只有&lt;code&gt;render()&lt;/code&gt;这个方法。顶层组件&lt;code&gt;FilterableProductTable&lt;/code&gt;会将你的数据模型看成一个&lt;code&gt;props&lt;/code&gt;。如果你修改了底层数据模型，只要再次调用&lt;code&gt;ReactDOM.render()&lt;/code&gt;，用户界面就会更新。很容易发现你的用户界面更新了，在什么地方做了变动，这里面没有什么复杂的东西。React的单向数据流（或称单向绑定）可以保持应用平稳高速地运行。&lt;/p&gt;
+
+&lt;p&gt;如果需要获得更多帮助来实现这个步骤，可以参考&lt;a href=&quot;https://facebook.github.io/react/docs/&quot; title=&quot;React docs&quot;&gt;React文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;插曲: Props vs State&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在React里有两种“模型”数据：&lt;code&gt;props&lt;/code&gt;和&lt;code&gt;state&lt;/code&gt;。会区分这两者很重要；如果你不确定这两者区别，请浏览&lt;a href=&quot;https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html&quot;&gt;React文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;state-&quot;&gt;第三步: 定义用户界面 state 的最小（但完备）表达方式&lt;/h2&gt;
+
+&lt;h3 id=&quot;step-3-identify-the-minimal-but-complete-representation-of-ui-state&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 3: Identify The Minimal (but complete) Representation Of UI State&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;为了让用户界面可交互，你必须能够触发修改底层数据模型。React利用&lt;code&gt;state&lt;/code&gt;将这一过程变得更为简单了。&lt;/p&gt;
+
+&lt;p&gt;准确地构建应用，首先你需要为你的应用建立一个可变的状态最小集。而这里面的要点就是 &lt;strong&gt;DRY&lt;/strong&gt;：不要做重复的工作（&lt;em&gt;Don’t Repeat Yourself&lt;/em&gt;）。想想为什么你的应用需要一个最小的状态集，再考虑除了你随即需要的所有东西。比如，你在建立一个执行清单，只需要有一个保存执行项的数组，而不需要再用一个状态变量用于计数。取而代之，当你想获得执行项的个数时，简单地获得数组长度即可。&lt;/p&gt;
+
+&lt;p&gt;现在想想我们的应用里需要用到的所有数据。我们有：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;产品的初始清单&lt;/strong&gt;（&lt;em&gt;The original list of products&lt;/em&gt;）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;用户键入的搜索词&lt;/strong&gt;（&lt;em&gt;The search text the user has entered&lt;/em&gt;）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;复选框的值&lt;/strong&gt;（&lt;em&gt;The value of the checkbox&lt;/em&gt;）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;产品的过滤清单&lt;/strong&gt;（&lt;em&gt;The filtered list of products&lt;/em&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我们所有的数据过一遍，看看哪一个才是 “state” 。针对每一个数据，简单地问三个问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;是否能通过&lt;code&gt;props&lt;/code&gt;从父节点传递这个数据到子节点？如果可以，那就不是&lt;code&gt;state&lt;/code&gt;。&lt;/li&gt;
+  &lt;li&gt;这个数据值是否始终不变呢？如果是，那就不是&lt;code&gt;state&lt;/code&gt;。&lt;/li&gt;
+  &lt;li&gt;你是否能够通过其他的&lt;code&gt;props&lt;/code&gt;或&lt;code&gt;state&lt;/code&gt;得到这个数据值呢？如果可以，那就不是&lt;code&gt;state&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;可以通过&lt;code&gt;props&lt;/code&gt;传递&lt;strong&gt;产品的初始清单&lt;/strong&gt;，所以它就不是&lt;code&gt;state&lt;/code&gt;。 &lt;strong&gt;搜索词&lt;/strong&gt;和&lt;strong&gt;复选框的值&lt;/strong&gt;看上去好像是&lt;code&gt;state&lt;/code&gt;，因为它们不是固定的，而且不能通过其它的数据来获得。最后一个，&lt;strong&gt;产品的过滤清单&lt;/strong&gt;也不是&lt;code&gt;state&lt;/code&gt;，因为它能够通过&lt;strong&gt;产品的初始清单&lt;/strong&gt;结合&lt;strong&gt;搜索条&lt;/strong&gt;和&lt;strong&gt;复选框的值&lt;/strong&gt;来获得。&lt;/p&gt;
+
+&lt;p&gt;所以，我们的 “state” 就是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;用户键入的搜索词&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;复选框的值&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;state--1&quot;&gt;第四步：定义 State 的作用域&lt;/h2&gt;
+
+&lt;h3 id=&quot;step-4-identify-where-your-state-should-live&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 4: Identify Where Your State Should Live&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p data-height=&quot;265&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;ORzEkG&quot; data-default-tab=&quot;js,result&quot; data-user=&quot;lacker&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;Thinking In React: Step 4&quot; class=&quot;codepen&quot;&gt;&lt;a href=&quot;http://codepen.io/lacker/pen/ORzEkG/&quot;&gt;请转向CodePen演示代码.&lt;/a&gt;&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;那么我们已经定义好了应用状态最小集。接下来，我们需要定义哪一个组件如何变换或者拥有状态值。&lt;/p&gt;
+
+&lt;p&gt;记住React中只有顺着组件层级向下的单向数据流。你很可能不能立刻很清楚地知道哪个组件拥有状态值。&lt;strong&gt;这也是新手常难以理解的地方&lt;/strong&gt;，但只要跟随下面的步骤就很容易想明白：&lt;/p&gt;
+
+&lt;p&gt;对于应用中的&lt;code&gt;state&lt;/code&gt;属性，需要：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;定义每一个基于&lt;code&gt;state&lt;/code&gt;渲染出东西的组件。&lt;/li&gt;
+  &lt;li&gt;找出一个&lt;strong&gt;共有的所有者组件&lt;/strong&gt;（一个单独的，置于所有在层级中需要&lt;code&gt;state&lt;/code&gt;属性的组件之上的组件）。&lt;/li&gt;
+  &lt;li&gt;共有的所有者组件，或在层级中处于较高位置中的组件需要拥有&lt;code&gt;state&lt;/code&gt;属性。&lt;/li&gt;
+  &lt;li&gt;如果你无法找到这么一个拥有&lt;code&gt;state&lt;/code&gt;属性的组件，那就创造一个组件，让它拥有&lt;code&gt;state&lt;/code&gt;属性，并且将它置于层级中，高于那个&lt;strong&gt;共有的所有者组件&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;现在我们可以在应用中执行上面的策略：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;ProductTable&lt;/code&gt;需要基于&lt;code&gt;state&lt;/code&gt;属性来过滤产品清单，而&lt;code&gt;SearchBar&lt;/code&gt;需要显示搜索词和复选框。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;FilterableProductTable&lt;/code&gt;就是&lt;strong&gt;共有的所有者组件&lt;/strong&gt;。&lt;/li&gt;
+  &lt;li&gt;过滤词和复选框的值存在于整个&lt;code&gt;FilterableProductTable&lt;/code&gt;之中，这样概念上就说得过去了。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;好了，我们就确定好了在&lt;code&gt;FilterableProductTable&lt;/code&gt;中的&lt;code&gt;state&lt;/code&gt;属性了。首先，添加一个实例属性&lt;code&gt;this.state = {filterText: &#39;&#39;, inStockOnly: false}&lt;/code&gt;到&lt;code&gt;FilterableProductTable&lt;/code&gt;的构造函数中去，这样可以反映出应用的初始状态。然后，将&lt;code&gt;filterText&lt;/code&gt;和&lt;code&gt;inStockOnly&lt;/code&gt;作为&lt;code&gt;props&lt;/code&gt;属性传递到&lt;code&gt;ProductTable&lt;/code&gt;和&lt;code&gt;SearchBar&lt;/code&gt;。最后，可以利用这些&lt;code&gt;props&lt;/code&gt;属性从整个&lt;code&gt;ProductTable&lt;/code&gt;中过滤出产品搜索结果和设置&lt;code&gt;SearchBar&lt;/code&gt;的表单文本字段的值。&lt;/p&gt;
+
+&lt;p&gt;现在你可以看看你的应用运行得如何：在搜索框中输入 “ball” （ 即&lt;code&gt;filterText&lt;/code&gt;设置成 “ball” ），再刷新页面。这样你就会看见筛选后的结果。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;第五步：添加反向数据流&lt;/h2&gt;
+
+&lt;h3 id=&quot;step-5-add-inverse-data-flow&quot;&gt;&lt;strong&gt;&lt;em&gt;Step 5: Add Inverse Data Flow&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p data-height=&quot;265&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;ALxdJq&quot; data-default-tab=&quot;js,result&quot; data-user=&quot;lacker&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;Thinking In React: Step 5&quot; class=&quot;codepen&quot;&gt;&lt;a href=&quot;http://codepen.io/lacker/pen/ALxdJq/&quot;&gt;请转向CodePen演示代码.&lt;/a&gt;&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;目前为止，我们的应用已经可以顺着层级从上至下，利用_props_和_state_正确地渲染。现在是时候添加反数据流的方式了：在&lt;code&gt;FilterableProductTable&lt;/code&gt;中，层级中的底层组件需要更新&lt;code&gt;state&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;React尽可能使得这个数据流明晰点，这样可以很容易地演示你的程序是如何工作的。但是，相比于传统的双向数据绑定，这会输入更多的代码。&lt;/p&gt;
+
+&lt;p&gt;如果你尝试在目前这个版本输入或钩复选框，你会发现React毫无反应。这是有意为之的，因为我们已经设置了输入文本字段（ &lt;code&gt;input&lt;/code&gt; ）的值，而这个值就等同于从&lt;code&gt;FilterableProductTable&lt;/code&gt;传递&lt;code&gt;state&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;让我们来仔细想想我们想要让它做什么。我们需要的是，无论用户什么时候去修改表单，我们会根据用户输入去更新&lt;code&gt;state&lt;/code&gt;。因为每个组件只更新它们各自的&lt;code&gt;state&lt;/code&gt;，&lt;code&gt;FilterableProductTable&lt;/code&gt;将会传入一个回调函数（ &lt;em&gt;callback&lt;/em&gt; ）给&lt;code&gt;SearchBar&lt;/code&gt;，由这个函数更新&lt;code&gt;state&lt;/code&gt;。我们利用一个&lt;code&gt;onChange&lt;/code&gt;事件去跟踪输入文本的变化。而这个由&lt;code&gt;FilterableProductTable&lt;/code&gt;传入的回调函数就是&lt;code&gt;setState()&lt;/code&gt;，这样整个应用就可以工作起来了。&lt;/p&gt;
+
+&lt;p&gt;虽然这听上去很复杂的样子，但是真的只有那么几行代码。也很细致地演示了贯穿整个应用的数据流。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;写在最后&lt;/h2&gt;
+
+&lt;h3 id=&quot;and-thats-it&quot;&gt;&lt;strong&gt;&lt;em&gt;And That’s It&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;希望能帮助你去理解如何用 React 创建组件和应用。也许在这过程中，你会输入比以往更多的代码，但是你要记住，代码能够被读懂远比写代码重要，而这个模块就是用了很详尽的代码为了让你更容易读懂。如果你要创建一个大型的组件库，你会很感激整个组件清晰，模块化，还有代码可重用，这样你才开始给代码减重:)&lt;/p&gt;
+</description>
+        <pubDate>Sun, 20 Nov 2016 20:06:52 +1100</pubDate>
+        <link>http://jarvinia.github.io/frontend/2016/11/20/think_in_react_cn.html</link>
+        <guid isPermaLink="true">http://jarvinia.github.io/frontend/2016/11/20/think_in_react_cn.html</guid>
+        
+        <category>Chinese</category>
+        
+        
+        <category>frontend</category>
+        
+      </item>
     
       <item>
         <title>Javascript学习（二）</title>
@@ -143,6 +335,70 @@ to get involved in coding.
         <pubDate>Thu, 06 Oct 2016 00:00:00 +1100</pubDate>
         <link>http://jarvinia.github.io/javascript/2016/10/06/javascript_learning2.html</link>
         <guid isPermaLink="true">http://jarvinia.github.io/javascript/2016/10/06/javascript_learning2.html</guid>
+        
+        <category>Chinese</category>
+        
+        
+        <category>javascript</category>
+        
+      </item>
+    
+      <item>
+        <title>Javascript学习（一）</title>
+        <description>&lt;p&gt;《Javascript高级程序设计》第一章~第五章内容学习简单要点提取：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;函数参数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;可以不定义函数参数变量，直接使用arguments对象，或者两者混用。如果改变arguments对象，参数值也会随之改变，这只是单向的。所以修改命名参数不会改变arguments对象。
+&lt;!--break--&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;所有参数只能按值传递，不能按引用传递。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;addTen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addTen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 20&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//30&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;没有重载&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;没有块级作用域&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 10&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;没有var修饰的变量自动成全局变量&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;优化内存占用的最佳方法就是，用null来释放引用。解除引用的目的不是回收该变量的内存，而是让值脱离当前环境，让垃圾收集器将其回收。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Tue, 27 Sep 2016 22:37:29 +1000</pubDate>
+        <link>http://jarvinia.github.io/javascript/2016/09/27/javascript_learning.html</link>
+        <guid isPermaLink="true">http://jarvinia.github.io/javascript/2016/09/27/javascript_learning.html</guid>
         
         <category>Chinese</category>
         
