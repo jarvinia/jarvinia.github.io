@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Javascript学习（一）</title>
-  <meta name="description" content="《Javascript高级程序设计》第一章~第五章内容学习简单要点提取：">
+  <title>调试package依赖版本的问题</title>
+  <meta name="description" content="背景今天在这里给大家分享一个debug的经历。上周，因为自己有一个新的feature要上线，但是同时另外一个同事的代码也合入master，他的新合入的东西，主要是把工程下面的结构变动，把一些client端的东西拉出来，放在最外层。就这样而已，我预估，这应该不会花费太多时间去merge，无非是调节调用路径和把我的一...">
 
-  <link rel="shortcut icon" href="http://jarvinia.github.io/fav.ico">
+  <link rel="shortcut icon" href="/fav.ico">
   <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Tangerine" rel="stylesheet">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://jarvinia.github.io/javascript/2016/09/27/javascript_learning.html">
+  <link rel="canonical" href="http://jarvinia.github.io/yarn/2018/03/06/yarn_error.html">
   <link rel="alternate" type="application/rss+xml" title="Jun Tu's Soup" href="http://jarvinia.github.io/feed.xml" />
 </head>
 
@@ -67,61 +67,46 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Javascript学习（一）</h1>
-    <p class="post-meta">Sep 27, 2016</p>
+    <h1 class="post-title">调试package依赖版本的问题</h1>
+    <p class="post-meta">Mar 6, 2018</p>
   </header>
 
   <article class="post-content">
-    <p>《Javascript高级程序设计》第一章~第五章内容学习简单要点提取：</p>
-
-<ul>
-  <li>函数参数</li>
-</ul>
-
-<p>可以不定义函数参数变量，直接使用arguments对象，或者两者混用。如果改变arguments对象，参数值也会随之改变，这只是单向的。所以修改命名参数不会改变arguments对象。
+    <h3 id="section">背景</h3>
+<p>今天在这里给大家分享一个debug的经历。上周，因为自己有一个新的feature要上线，但是同时另外一个同事的代码也合入master，他的新合入的东西，主要是把工程下面的结构变动，把一些client端的东西拉出来，放在最外层。就这样而已，我预估，这应该不会花费太多时间去merge，无非是调节调用路径和把我的一些新module放到新的路径下面。结果，某个原有的jquery plugin找不到了。以前一旦碰到client端的合入问题，我首先做的就是<code>yarn</code>更新js库。这一次，我同样做了，但是仍没有解决。我再去比对代码，没有发现任何有冲突的地方。<br />
+ 
 <!--break--></p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">num2</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-	<span class="nx">alert</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">num3</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+<h3 id="section-1">问题定位</h3>
+<p>在比对后，我觉得不是自己代码的问题，于是切换至master，还是同样的结果。后来和同事交流了一下，他说，可能是jquery版本不对，目前我们的工程主要依赖两个版本，一个是2.2.4，一个是1.8.3。而所在问题的那部分应该用的是2.2.4，随后我打断点进去看看，用<code>$.fn.jquery</code>去读取版本，没错，是2.2.4啊。这时候，我彻底死路了，但是我觉得应该是webpack的问题，没有把它编进去。后来就在google上搜索，这个时候看到了一些类似的问题，已经他们的一些调试手段。<strong>有人用<code>npm list</code>列出了所有的模块版本信息</strong>，结果我一看不对啊，为什么这个plugin的dependencies的jquery是3.2.1的，我就尝试删除重新用yarn更新，奇怪的是，删除后yarn并没有更新，而是提示说，你的模块库已经是最新的了。后来，我发现另外一个command去查看某个package的被引用的版本信息，就是<strong><code>yarn list package-name</code></strong>，这样只会列举某个具体的库被引用的信息，比如：</p>
 
-<ul>
-  <li>所有参数只能按值传递，不能按引用传递。</li>
-</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>yarn list jquery
+yarn list v1.5.1
+warning Filtering by arguments is deprecated. Please use the pattern option instead. 
+├─ foundation-sites@6.4.3  
+│  └─ jquery@3.2.1  
+└─ jquery@2.2.4</code></pre></div>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">addTen</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">num</span><span class="o">+=</span><span class="mi">10</span><span class="p">;</span>
-	<span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">count</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">res</span><span class="o">=</span><span class="nx">addTen</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span> <span class="c1">// 20</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span> <span class="c1">//30</span></code></pre></div>
+<p>再回到我之前谈到的那个问题，为什么它依赖的jquery版本不对呢？我又去看它的package.json，上面提到<code>"jquery": "&gt;=1.6.0"</code>。我再去看<code>yarn.lock</code>,</p>
 
-<ul>
-  <li>
-    <p>没有重载</p>
-  </li>
-  <li>
-    <p>没有块级作用域</p>
-  </li>
-</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">jquery@2.2.4, <span class="s2">&quot;jquery@&gt;= 1.9.1&quot;</span>, <span class="s2">&quot;jquery@&gt;=1.4.2 &lt;4&quot;</span>, jquery@&gt;<span class="o">=</span>1.5, jquery@&gt;<span class="o">=</span>1.6.0, jquery@&gt;<span class="o">=</span>1.8:
+  version <span class="s2">&quot;2.2.4&quot;</span>
+  resolved <span class="s2">&quot;https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02&quot;</span>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">doSomething</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 10</span></code></pre></div>
+jquery@&gt;<span class="o">=</span>3.0.0:
+  version <span class="s2">&quot;3.2.1&quot;</span>
+  resolved <span class="s2">&quot;https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787&quot;</span></code></pre></div>
 
-<ul>
-  <li>
-    <p>没有var修饰的变量自动成全局变量</p>
-  </li>
-  <li>
-    <p>优化内存占用的最佳方法就是，用null来释放引用。解除引用的目的不是回收该变量的内存，而是让值脱离当前环境，让垃圾收集器将其回收。</p>
-  </li>
-</ul>
+<p>这个时候，我就觉得应该是yarn的问题，然后就去搜索为啥yarn没resolve正确的版本。在部分搜索的结果里发现这是yarn的一个bug，但已经解决了。这个时候我就去某个最近已经合入了master的测试服务器上查看yarn的版本，发现自己的版本太低了。</p>
 
+<p>接下来，就是更新node和yarn的过程。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+<span class="c"># update yarn:</span>
+npm install --global yarn</code></pre></div>
 
   </article>
 
@@ -139,7 +124,7 @@ data-show-faces="true">
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "jarvinia";
-    var disqus_url = "http://jarvinia.github.io/javascript/2016/09/27/javascript_learning.html";
+    var disqus_url = "http://jarvinia.github.io/yarn/2018/03/06/yarn_error.html";
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

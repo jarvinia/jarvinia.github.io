@@ -12,7 +12,7 @@ stuck with some tech problems. And I hope more and more women
 to get involved in coding.
 ">
 
-  <link rel="shortcut icon" href="http://jarvinia.github.io/fav.ico">
+  <link rel="shortcut icon" href="/fav.ico">
   <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Tangerine" rel="stylesheet">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -73,22 +73,15 @@ to get involved in coding.
         
             
                 <li class="post_item">
+    <span class="date">06 Mar 2018</span> &raquo;
+    <a class="title" href="/yarn/2018/03/06/yarn_error.html">调试package依赖版本的问题</a>
+
+    <p class="excerpt"></p>
+</li>
+            
+                <li class="post_item">
     <span class="date">20 Nov 2016</span> &raquo;
     <a class="title" href="/frontend/2016/11/20/think_in_react_cn.html">React 编程思想</a>
-
-    <p class="excerpt"></p>
-</li>
-            
-                <li class="post_item">
-    <span class="date">06 Oct 2016</span> &raquo;
-    <a class="title" href="/javascript/2016/10/06/javascript_learning2.html">Javascript学习（二）</a>
-
-    <p class="excerpt"></p>
-</li>
-            
-                <li class="post_item">
-    <span class="date">27 Sep 2016</span> &raquo;
-    <a class="title" href="/javascript/2016/09/27/javascript_learning.html">Javascript学习（一）</a>
 
     <p class="excerpt"></p>
 </li>
@@ -99,6 +92,21 @@ to get involved in coding.
     <div class="row">
         <div class="col-sm-8 blog-main">
             <div class="post">
+            
+                <div class="post_place_holder">
+   <h2><a href="/yarn/2018/03/06/yarn_error.html">调试package依赖版本的问题</a></h2>
+   <span class="post-date">March 06, 2018</span>
+   <h3 id="section">背景</h3>
+<p>今天在这里给大家分享一个debug的经历。上周，因为自己有一个新的feature要上线，但是同时另外一个同事的代码也合入master，他的新合入的东西，主要是把工程下面的结构变动，把一些client端的东西拉出来，放在最外层。就这样而已，我预估，这应该不会花费太多时间去merge，无非是调节调用路径和把我的一些新module放到新的路径下面。结果，某个原有的jquery plugin找不到了。以前一旦碰到client端的合入问题，我首先做的就是<code>yarn</code>更新js库。这一次，我同样做了，但是仍没有解决。我再去比对代码，没有发现任何有冲突的地方。<br />
+ 
+
+   
+      <a href="/yarn/2018/03/06/yarn_error.html">read more</a>
+   
+
+</div>
+
+<hr>
             
                 <div class="post_place_holder">
    <h2><a href="/frontend/2016/11/20/think_in_react_cn.html">React 编程思想</a></h2>
@@ -119,68 +127,24 @@ to get involved in coding.
 
 <hr>
             
-                <div class="post_place_holder">
-   <h2><a href="/javascript/2016/10/06/javascript_learning2.html">Javascript学习（二）</a></h2>
-   <span class="post-date">October 06, 2016</span>
-   <p>这篇文章主要介绍一些关于如何创建对象的知识。参考《Javascript高级程序设计》第六章-面向对象的程序设计。</p>
-
-<h3 id="section">构造函数</h3>
-<ul>
-  <li>始终以一个大写字母开头</li>
-  <li>没有显示地创造对象</li>
-  <li>直接将属性和方法赋给this对象</li>
-  <li>没有return语句</li>
-  <li>任何可以用new调用的函数即为构造函数
-
-   
-      <a href="/javascript/2016/10/06/javascript_learning2.html">read more</a>
-   
-
-</div>
-
-<hr>
-            
-                <div class="post_place_holder">
-   <h2><a href="/javascript/2016/09/27/javascript_learning.html">Javascript学习（一）</a></h2>
-   <span class="post-date">September 27, 2016</span>
-   <p>《Javascript高级程序设计》第一章~第五章内容学习简单要点提取：</p>
-
-<ul>
-  <li>函数参数</li>
-</ul>
-
-<p>可以不定义函数参数变量，直接使用arguments对象，或者两者混用。如果改变arguments对象，参数值也会随之改变，这只是单向的。所以修改命名参数不会改变arguments对象。
-
-   
-      <a href="/javascript/2016/09/27/javascript_learning.html">read more</a>
-   
-
-</div>
-
-<hr>
-            
             </div>
         </div>
 
         <div class="col-sm-4 blog-sidebar" style="word-wrap: break-word;">
             <div class="sidebar-module sidebar-module-inset">
                 <h2 class="sidebar-title">About</h2>
-                <blockquote><p class="sidebar-about">Hi, 我是涂珺，目前是一名web开发工程师，在悉尼定居。曾经在杭州诺西工作过三年，主要做一些自动化测试的工作。我喜欢尝试一些新的技术，通过不断练习来掌握它们，可能我并不精通，但是很喜欢倒腾，缺点就是三分钟热度。所以我希望通过写博客来巩固新知识。</p></blockquote>
+                <blockquote><p class="sidebar-about">Hi, 我是涂珺，目前是一名web开发工程师，在悉尼定居。我喜欢尝试一些新的技术，通过不断练习来掌握它们，可能我并不精通，但是很喜欢倒腾，缺点就是三分钟热度。所以我希望通过写博客来巩固新知识. <a href="mailto:jarvinia.tu@gmail.com?Subject=Hello%20again" target="_top">Feel free to contact me.</a></p></blockquote>
             </div>
             <div class="sidebar-module sidebar-module-inset monthly-archive">
                 <h2 class="sidebar-title">Achieves</h2>
                 <ul>
                 
                     <li>
-                        <a href="/2016/9">September 2016</a> (1 posts)
-                    </li>
-                
-                    <li>
-                        <a href="/2016/10">October 2016</a> (1 posts)
-                    </li>
-                
-                    <li>
                         <a href="/2016/11">November 2016</a> (1 posts)
+                    </li>
+                
+                    <li>
+                        <a href="/2018/3">March 2018</a> (1 posts)
                     </li>
                 
                 </ul>
